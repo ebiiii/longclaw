@@ -15,17 +15,17 @@ class AddressViewSet(viewsets.ModelViewSet):
     """
     queryset = models.Address.objects.all()
     serializer_class = serializers.AddressSerializer
-    
+
     def perform_create(self, serializer):
         output = super().perform_create(serializer)
         instance = serializer.instance
         address_modified.send(sender=models.Address, instance=instance)
-    
+
     def perform_update(self, serializer):
         output = super().perform_update(serializer)
         instance = serializer.instance
         address_modified.send(sender=models.Address, instance=instance)
-    
+
     def perform_destroy(self, instance):
         output = super().perform_destroy(instance)
         address_modified.send(sender=models.Address, instance=instance)
@@ -37,7 +37,7 @@ def get_shipping_cost_kwargs(request, country=None):
         if country_code is not None:
             raise utils.InvalidShippingCountry("Cannot specify country and country_code")
         country_code = country
-    
+
     destination = request.query_params.get('destination', None)
     if destination:
         try:
@@ -46,14 +46,14 @@ def get_shipping_cost_kwargs(request, country=None):
             raise utils.InvalidShippingDestination("Address not found")
     elif not country_code:
         raise utils.InvalidShippingCountry("No country code supplied")
-    
+
     if not country_code:
         country_code = destination.country.pk
 
     bid = basket_id(request)
     option = request.query_params.get('shipping_rate_name', 'standard')
-    settings = Configuration.for_site(request.site)
-    
+    settings = Configuration.for_request(request)
+
     return dict(country_code=country_code, destination=destination, basket_id=bid, settings=settings, name=option)
 
 
@@ -106,12 +106,12 @@ def shipping_options(request, country=None):
         kwargs = get_shipping_cost_kwargs(request, country=country)
     except (utils.InvalidShippingCountry, utils.InvalidShippingDestination) as e:
         return Response(data={'message': e.message}, status=status.HTTP_400_BAD_REQUEST)
-    
+
     country_code = kwargs['country_code']
     settings = kwargs['settings']
     bid = kwargs['basket_id']
     destination = kwargs['destination']
-    
+
     processors = ShippingRateProcessor.objects.filter(countries__in=[country_code])
     if processors:
         if not destination:
@@ -123,13 +123,13 @@ def shipping_options(request, country=None):
             )
         for processor in processors:
             processor.get_rates(settings=settings, basket_id=bid, destination=destination)
-    
+
     q = Q(countries__in=[country_code]) | Q(basket_id=bid, destination=None)
-    
+
     if destination:
         q.add(Q(destination=destination, basket_id=''), Q.OR)
         q.add(Q(destination=destination, basket_id=bid), Q.OR)
-    
+
     qrs = models.ShippingRate.objects.filter(q)
     serializer = serializers.ShippingRateSerializer(qrs, many=True)
     return Response(

@@ -27,7 +27,7 @@ class Configuration(BaseSetting):
         help_text=('Whether to enable default shipping.'
                    ' This essentially means you ship to all countries,'
                    ' not only those with configured shipping rates'))
-    
+
     shipping_origin = models.ForeignKey(Address, blank=True, null=True, on_delete=models.PROTECT)
 
     currency_html_code = models.CharField(
@@ -46,7 +46,6 @@ class Configuration(BaseSetting):
         FieldPanel('default_shipping_carrier'),
         FieldPanel('default_shipping_enabled'),
         SnippetChooserPanel('shipping_origin'),
-        FieldPanel('currency_html_code'),
         FieldPanel('currency_html_code'),
         FieldPanel('currency')
     )
