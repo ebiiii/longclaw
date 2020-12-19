@@ -91,7 +91,9 @@ def create_order(email,
         order_item = OrderItem(
             product=item.variant,
             quantity=item.quantity,
-            order=order
+            order=order,
+            keep_price=item.variant.price,
+            keep_title=item.get_product_title(),
         )
         order_item.save()
 

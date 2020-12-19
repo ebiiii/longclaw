@@ -88,9 +88,12 @@ class OrderItem(models.Model):
     quantity = models.IntegerField(default=1)
     order = models.ForeignKey(Order, related_name='items', on_delete=models.CASCADE)
 
+    keep_price = models.DecimalField(max_digits=12, decimal_places=2)
+    keep_title = models.CharField(max_length=255)
+
     @property
     def total(self):
-        return self.quantity * self.product.price
+        return self.quantity * self.keep_price
 
     def __str__(self):
-        return "{} x {}".format(self.quantity, self.product.get_product_title())
+        return "{} x {}".format(self.quantity, self.keep_title)

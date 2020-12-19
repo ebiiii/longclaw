@@ -8,4 +8,5 @@ class BasketView(ListView):
     def get_context_data(self, **kwargs):
         items, _ = utils.get_basket_items(self.request)
         total_price = sum(item.total() for item in items)
-        return {"basket": items, "total_price": total_price}
+        total_count = sum(item.quantity for item in items)
+        return {"basket": items, "total_price": total_price, "total_count": total_count}
