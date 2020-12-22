@@ -1,7 +1,10 @@
 from datetime import datetime
+from decimal import Decimal
 from django.db import models
 from longclaw.settings import PRODUCT_VARIANT_MODEL
 from longclaw.shipping.models import Address
+from longclaw.coupons.models import Coupon
+
 
 class Order(models.Model):
     SUBMITTED = 1
@@ -38,6 +41,8 @@ class Order(models.Model):
                                         blank=True,
                                         null=True)
 
+    coupon = models.ForeignKey(Coupon, blank=True, null=True, related_name="orders", on_delete=models.PROTECT)
+
     def __str__(self):
         return "Order #{} - {}".format(self.id, self.email)
 
@@ -48,6 +53,10 @@ class Order(models.Model):
         total = 0
         for item in self.items.all():
             total += item.total
+        if self.coupon and self.coupon.value_percent:
+            total = total - (total * min(self.coupon.value_percent, Decimal("100.0")) / Decimal("100.0"))
+        if self.coupon and self.coupon.value_absolute:
+            total = max(total - self.coupon.value_absolute, Decimal("0.0"))
         return total
 
     @property

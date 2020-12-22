@@ -5,6 +5,7 @@ from ipware.ip import get_client_ip
 
 from longclaw.basket.utils import get_basket_items, destroy_basket
 from longclaw.shipping.utils import get_shipping_cost
+from longclaw.coupons.utils import get_valid_coupon
 from longclaw.checkout.errors import PaymentError
 from longclaw.orders.models import Order, OrderItem
 from longclaw.shipping.models import Address
@@ -75,19 +76,20 @@ def create_order(email,
     else:
         shipping_rate = Decimal(0)
 
+    coupon = get_valid_coupon(basket_id=current_basket_id)
+
     order = Order(
         email=email,
         ip_address=ip_address,
         shipping_address=shipping_address,
         billing_address=billing_address,
-        shipping_rate=shipping_rate
+        shipping_rate=shipping_rate,
+        coupon=coupon,
     )
     order.save()
 
-    # Create the order items & compute total
-    total = 0
+    # Create the order items
     for item in basket_items:
-        total += item.total()
         order_item = OrderItem(
             product=item.variant,
             quantity=item.quantity,
@@ -101,7 +103,7 @@ def create_order(email,
         desc = 'Payment from {} for order id #{}'.format(email, order.id)
         try:
             transaction_id = GATEWAY.create_payment(request,
-                                                    total + shipping_rate,
+                                                    order.total + shipping_rate,
                                                     description=desc)
             order.payment_date = timezone.now()
             order.transaction_id = transaction_id
