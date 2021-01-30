@@ -63,7 +63,7 @@ def create_order(email,
     else:
         shipping_country = shipping_address.country
 
-    ip_address = get_client_ip(request)
+    ip_address, routable = get_client_ip(request)
     if shipping_country and shipping_option:
         site_settings = Configuration.for_request(request)
         shipping_rate = get_shipping_cost(
@@ -95,7 +95,7 @@ def create_order(email,
             quantity=item.quantity,
             order=order,
             keep_price=item.variant.price,
-            keep_title=item.get_product_title(),
+            keep_title=item.variant.get_product_title(),
         )
         order_item.save()
 
