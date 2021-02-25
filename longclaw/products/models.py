@@ -71,3 +71,7 @@ class ProductVariantBase(models.Model):
             return self.product.title
         except AttributeError:
             return self.ref
+
+    def update_stock(self, quantity):
+        self.stock += quantity
+        self.save()
