@@ -1,5 +1,6 @@
 from datetime import datetime
 from decimal import Decimal
+from django.conf import settings
 from django.db import models
 from longclaw.settings import PRODUCT_VARIANT_MODEL
 from longclaw.shipping.models import Address
@@ -27,6 +28,8 @@ class Order(models.Model):
     # contact info
     email = models.EmailField(max_length=128, blank=True, null=True)
     ip_address = models.GenericIPAddressField(blank=True, null=True)
+    user = models.ForeignKey(
+        settings.AUTH_USER_MODEL, blank=True, null=True, related_name="orders", on_delete=models.SET_NULL)
 
     # shipping info
     shipping_address = models.ForeignKey(

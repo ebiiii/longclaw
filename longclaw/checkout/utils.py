@@ -85,6 +85,7 @@ def create_order(email,
         billing_address=billing_address,
         shipping_rate=shipping_rate,
         coupon=coupon,
+        user=request.user if request.user.is_authenticated else None,
     )
     order.save()
 
