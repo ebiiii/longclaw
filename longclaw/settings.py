@@ -17,6 +17,9 @@ PAYMENT_GATEWAY = getattr(settings,
 PRODUCT_VARIANT_MODEL = getattr(
     settings, 'PRODUCT_VARIANT_MODEL', 'products.ProductVariantBase')
 
+# Should the creation of an order which would turn the stock to negative numbers be accepted
+ALLOW_NEGATIVE_STOCK = getattr(settings, 'ALLOW_NEGATIVE_STOCK', True)
+
 
 # Only required if using Stripe as the payment gateway
 STRIPE_PUBLISHABLE = getattr(settings, 'STRIPE_PUBLISHABLE', '')

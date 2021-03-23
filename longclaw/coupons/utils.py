@@ -1,9 +1,9 @@
-from longclaw.coupons.models import BasketCoupon
+from longclaw.coupons.models import BasketCoupon, Coupon
 
 
-def get_valid_coupon(basket_id=None):
-    """Return the coupon if any and if valid
+def get_coupon(basket_id=None):
+    """Return the coupon if any
     """
     basket_coupon = BasketCoupon.objects.filter(basket_id=basket_id).first()
-    if basket_coupon and basket_coupon.coupon.is_valid():
-        return basket_coupon.coupon
+    if basket_coupon:
+        return Coupon.objects.select_for_update().get(pk=basket_coupon.coupon_id)

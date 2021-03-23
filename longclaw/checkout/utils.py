@@ -1,16 +1,16 @@
 from decimal import Decimal
-from django.utils.module_loading import import_string
+from longclaw.settings import ALLOW_NEGATIVE_STOCK
 from django.utils import timezone
 from ipware.ip import get_client_ip
 
 from longclaw.basket.utils import get_basket_items, destroy_basket
 from longclaw.shipping.utils import get_shipping_cost
-from longclaw.coupons.utils import get_valid_coupon
-from longclaw.checkout.errors import PaymentError
+from longclaw.coupons.utils import get_coupon
+from longclaw.checkout.errors import BasketValidationError, PaymentError
 from longclaw.orders.models import Order, OrderItem
 from longclaw.shipping.models import Address
 from longclaw.configuration.models import Configuration
-from longclaw.utils import GATEWAY
+from longclaw.utils import GATEWAY, ProductVariant
 
 
 def create_order(email,
@@ -76,7 +76,22 @@ def create_order(email,
     else:
         shipping_rate = Decimal(0)
 
-    coupon = get_valid_coupon(basket_id=current_basket_id)
+    # aquire locks for all variants and coupons to prevent concurrent issues with stocks/coupon validity
+    # Warning, ordering is important to avoid deadlocks
+    variants = ProductVariant.objects.select_for_update().filter(pk__in=[item.variant_id for item in basket_items]).order_by('pk')
+
+    if not ALLOW_NEGATIVE_STOCK:
+        errors = []
+        for item in basket_items:
+            if item.quantity > item.variant.stock:
+                errors.append("{} ({})".format(item.variant.get_product_title(), item.variant.stock))
+        if errors:
+            raise BasketValidationError(", ".join(errors), reason_code="STOCK")
+
+    coupon = get_coupon(basket_id=current_basket_id)
+
+    if coupon and not coupon.is_valid():
+        raise BasketValidationError(coupon.code, reason_code="COUPON")
 
     order = Order(
         email=email,
