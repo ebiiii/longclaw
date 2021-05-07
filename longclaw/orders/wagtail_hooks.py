@@ -76,6 +76,7 @@ class DetailView(InspectView):
     def get_context_data(self, **kwargs):
         context = {
             'order_id': self.instance.id,
+            'instance': self.instance,
             'api_url_prefix': API_URL_PREFIX
         }
         context.update(kwargs)
