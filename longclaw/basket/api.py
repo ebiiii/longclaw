@@ -1,3 +1,4 @@
+from django.utils.translation import ugettext_lazy as _
 from rest_framework.decorators import action
 from rest_framework import permissions, status, viewsets
 from rest_framework.response import Response
@@ -47,12 +48,12 @@ class BasketViewSet(viewsets.ModelViewSet):
             serializer = BasketItemSerializer(self.get_queryset(request), many=True)
             response = Response(data=serializer.data,
                                 status=status.HTTP_201_CREATED)
-            
+
             basket_modified.send(sender=BasketItem, basket_id=bid)
 
         else:
             response = Response(
-                {"message": "Missing 'variant_id'"},
+                {"message": _("Missing 'variant_id'")},
                 status=status.HTTP_400_BAD_REQUEST)
 
         return response
@@ -71,9 +72,9 @@ class BasketViewSet(viewsets.ModelViewSet):
         serializer = BasketItemSerializer(self.get_queryset(request), many=True)
         response = Response(data=serializer.data,
                             status=status.HTTP_200_OK)
-        
+
         basket_modified.send(sender=BasketItem, basket_id=bid)
-        
+
         return response
 
     def destroy(self, request, variant_id=None):
@@ -81,7 +82,7 @@ class BasketViewSet(viewsets.ModelViewSet):
         Remove an item from the basket
         """
         bid = utils.basket_id(request)
-        
+
         variant = ProductVariant.objects.get(id=variant_id)
         quantity = int(request.data.get("quantity", 1))
         try:
@@ -94,10 +95,10 @@ class BasketViewSet(viewsets.ModelViewSet):
         serializer = BasketItemSerializer(self.get_queryset(request), many=True)
         response = Response(data=serializer.data,
                         status=status.HTTP_200_OK)
-        
+
         basket_modified.send(sender=BasketItem, basket_id=bid)
-        
-        return response 
+
+        return response
 
     @action(detail=False, methods=['get'])
     def total_items(self, request):

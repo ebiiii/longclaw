@@ -3,12 +3,13 @@ from jinja2 import nodes
 from jinja2.ext import Extension
 
 from django.template.loader import get_template
+from django.utils.translation import ugettext_lazy as _
 
 from .templatetags.basket_tags import get_basket_items
 from .utils import get_basket_items
 
 
-def add_to_basket_btn(variant_id, btn_class="btn btn-default", btn_text="Add To Basket"):
+def add_to_basket_btn(variant_id, btn_class="btn btn-default", btn_text=_("Add To Basket")):
     """Button to add an item to the basket
     """
     basket_template = get_template('basket/add_to_basket.html')

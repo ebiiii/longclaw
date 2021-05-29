@@ -1,4 +1,5 @@
 from django import template
+from django.utils.translation import ugettext_lazy as _
 from longclaw.basket.utils import get_basket_items
 
 register = template.Library()
@@ -13,7 +14,7 @@ def basket(context):
 
 
 @register.inclusion_tag('basket/add_to_basket.html')
-def add_to_basket_btn(variant_id, btn_class="btn btn-default", btn_text="Add To Basket"):
+def add_to_basket_btn(variant_id, btn_class="btn btn-default", btn_text=_("Add To Basket")):
     """Button to add an item to the basket
     """
     return {

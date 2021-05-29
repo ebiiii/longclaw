@@ -2,6 +2,7 @@ from datetime import datetime
 from decimal import Decimal
 from django.conf import settings
 from django.db import models
+from django.utils.translation import ugettext_lazy as _
 from longclaw.settings import PRODUCT_VARIANT_MODEL
 from longclaw.shipping.models import Address
 from longclaw.coupons.models import Coupon
@@ -14,12 +15,12 @@ class Order(models.Model):
     REFUNDED = 4
     FAILURE = 5
     ACCEPTED = 6
-    ORDER_STATUSES = ((SUBMITTED, 'Submitted'),
-                      (FULFILLED, 'Fulfilled'),
-                      (CANCELLED, 'Cancelled'),
-                      (REFUNDED, 'Refunded'),
-                      (FAILURE, 'Payment Failed'),
-                      (ACCEPTED, 'Payment Succeeded'))
+    ORDER_STATUSES = ((SUBMITTED, _('Submitted')),
+                      (FULFILLED, _('Fulfilled')),
+                      (CANCELLED, _('Cancelled')),
+                      (REFUNDED, _('Refunded')),
+                      (FAILURE, _('Payment Failed')),
+                      (ACCEPTED, _('Payment Succeeded')))
     payment_date = models.DateTimeField(blank=True, null=True)
     created_date = models.DateTimeField(auto_now_add=True)
     status = models.IntegerField(choices=ORDER_STATUSES, default=SUBMITTED)
@@ -49,7 +50,7 @@ class Order(models.Model):
     coupon = models.ForeignKey(Coupon, blank=True, null=True, related_name="orders", on_delete=models.PROTECT)
 
     def __str__(self):
-        return "Order #{} - {}".format(self.id, self.email)
+        return _("Order #{} - {}").format(self.id, self.email)
 
     @property
     def total(self):
@@ -78,9 +79,9 @@ class Order(models.Model):
         now = datetime.strftime(datetime.now(), "%b %d %Y %H:%M:%S")
         if GATEWAY.issue_refund(self.transaction_id, self.total):
             self.status = self.REFUNDED
-            self.status_note = "Refunded on {}".format(now)
+            self.status_note = _("Refunded on {}").format(now)
         else:
-            self.status_note = "Refund failed on {}".format(now)
+            self.status_note = _("Refund failed on {}").format(now)
         self.save()
 
     def fulfill(self):

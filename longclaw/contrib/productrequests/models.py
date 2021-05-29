@@ -1,5 +1,7 @@
 from django.db import models
+from django.utils.translation import ugettext_lazy as _
 from longclaw.settings import PRODUCT_VARIANT_MODEL
+
 
 class ProductRequest(models.Model):
     variant = models.ForeignKey(
@@ -9,5 +11,5 @@ class ProductRequest(models.Model):
     email = models.EmailField(
         blank=True,
         null=True,
-        help_text="Optional email of the customer who made the request"
+        help_text=_("Optional email of the customer who made the request")
     )

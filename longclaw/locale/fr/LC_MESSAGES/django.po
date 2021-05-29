@@ -1,0 +1,238 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-05-29 22:01+0200\n"
+"PO-Revision-Date: 2021-05-29 22:21+0200\n"
+"Language: fr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"X-Generator: Poedit 2.4.1\n"
+
+#: basket/api.py:56 contrib/productrequests/api.py:31
+msgid "Missing 'variant_id'"
+msgstr "'variant_id' manquant"
+
+#: basket/forms.py:19
+msgid "Cookies must be enabled."
+msgstr "Les cookies doivent être activés."
+
+#: basket/jinja2tags.py:12 basket/templatetags/basket_tags.py:17
+msgid "Add To Basket"
+msgstr "Ajouter au panier"
+
+#: checkout/api.py:41
+msgid "Missing parameters from request data"
+msgstr "Paramètres manquant des données de la requête"
+
+#: checkout/gateways/base.py:20
+msgid "Dummy error requested"
+msgstr "Erreur fictive demandée"
+
+#: checkout/utils.py:122
+msgid "Payment from {} for order id #{}"
+msgstr "Paiement de {} pour la commande numéro #{}"
+
+#: configuration/models.py:19
+msgid "The default shipping rate for countries which have not been configured"
+msgstr "Les frais d'envoi par défaut pour les pays qui n'ont pas été configurés"
+
+#: configuration/models.py:24
+msgid "The default shipping carrier"
+msgstr "Le mode de livraison par défaut"
+
+#: configuration/models.py:28
+msgid ""
+"Whether to enable default shipping.\n"
+"This essentially means you ship to all countries,\n"
+"not only those with configured shipping rates"
+msgstr ""
+"Si l'envoi par défaut est actif.\n"
+"Cela veut essentiellement dire que vous envoyé dans tous les pays,\n"
+"et pas seulement ceux avec des frais d'envoi configurés."
+
+#: configuration/models.py:37
+msgid "The HTML code for the currency symbol. Used for display purposes only"
+msgstr "Le code HTML pour le symbole monétaire. Utilisé uniquement pour de l'affichage"
+
+#: configuration/models.py:42
+msgid "The iso currency code to use for payments"
+msgstr "Le code ISO de la monnaie pour les paiements"
+
+#: contrib/productrequests/models.py:14
+msgid "Optional email of the customer who made the request"
+msgstr "E-mail optionnel du client qui a fait la requête"
+
+#: contrib/productrequests/templates/productrequests/requests_admin.html:6
+#, python-format
+msgid "Requests For %(page_type)s: %(title)s"
+msgstr "Requête pour %(page_type)s : %(title)s"
+
+#: contrib/productrequests/templates/productrequests/requests_admin.html:17
+#, python-format
+msgid "Requests For %(page_type)s <span>%(title)s</span>"
+msgstr "Requête pour %(page_type)s <span>%(title)s</span>"
+
+#: contrib/productrequests/templates/productrequests/requests_admin.html:20
+msgid "Status"
+msgstr "Statut"
+
+#: contrib/productrequests/templates/productrequests/requests_admin.html:31
+msgid "Request Date"
+msgstr "Date de requête"
+
+#: contrib/productrequests/templates/productrequests/requests_admin.html:32
+msgid "Variant"
+msgstr "Variante"
+
+#: contrib/productrequests/templates/productrequests/requests_admin.html:33
+msgid "Email"
+msgstr "E-mail"
+
+#: contrib/productrequests/templates/productrequests/requests_admin.html:41
+msgid "Not Given"
+msgstr "Non précisé"
+
+#: contrib/productrequests/wagtail_hooks.py:24
+msgid "View Requests"
+msgstr "Voir les requêtes"
+
+#: coupons/serializers.py:21
+msgid "Basket has already a coupon"
+msgstr "Le panier a déjà un code promo"
+
+#: coupons/serializers.py:24
+msgid "Coupon code invalid"
+msgstr "Code promo invalide"
+
+#: coupons/wagtail_hooks.py:10
+msgid "Coupon"
+msgstr "Code promo"
+
+#: orders/models.py:18
+msgid "Submitted"
+msgstr "Enregistrée"
+
+#: orders/models.py:19
+msgid "Fulfilled"
+msgstr "Envoyée"
+
+#: orders/models.py:20
+msgid "Cancelled"
+msgstr "Annulée"
+
+#: orders/models.py:21
+msgid "Refunded"
+msgstr "Remboursée"
+
+#: orders/models.py:22
+msgid "Payment Failed"
+msgstr "Échec du paiement"
+
+#: orders/models.py:23
+msgid "Payment Succeeded"
+msgstr "Paiement réussi"
+
+#: orders/models.py:53
+msgid "Order #{} - {}"
+msgstr "Commande #{} - {}"
+
+#: orders/models.py:82
+msgid "Refunded on {}"
+msgstr "Remboursée le {}"
+
+#: orders/models.py:84
+msgid "Refund failed on {}"
+msgstr "Remboursement échoué le {}"
+
+#: orders/templates/orders_detail.html:8
+#, python-format
+msgid "Back to %(model_name)s list"
+msgstr "Retour à la liste de %(model_name)s "
+
+#: orders/wagtail_hooks.py:27
+msgid "Cancel"
+msgstr "Annuler"
+
+#: orders/wagtail_hooks.py:29
+#, python-format
+msgid "Cancel this %s"
+msgstr "Annuler %s"
+
+#: orders/wagtail_hooks.py:41
+msgid "View"
+msgstr "Voir"
+
+#: orders/wagtail_hooks.py:43
+#, python-format
+msgid "View this %s"
+msgstr "Voir %s"
+
+#: shipping/api.py:39
+msgid "Cannot specify country and country_code"
+msgstr "country et country_code ne peuvent être spécifiés"
+
+#: shipping/api.py:47
+msgid "Address not found"
+msgstr "Adresse introuvable"
+
+#: shipping/api.py:49
+msgid "No country code supplied"
+msgstr "Pas de code pays fourni"
+
+#: shipping/api.py:79
+msgid "Shipping option {} is invalid"
+msgstr "Le mode d'envoi {} est invalide"
+
+#: shipping/api.py:83
+msgid "Shipping to {} is not available"
+msgstr "L'envoi vers {} n'est pas disponible"
+
+#: shipping/api.py:121
+msgid "Destination address is required for rates to {}."
+msgstr "L'adresse de destination est requise pour les frais vers {}."
+
+#: shipping/models/rates.py:19
+msgid "Unique name to refer to this shipping rate by"
+msgstr "Nom unique pour se référer à ces frais d'envoi"
+
+#: shipping/utils.py:30
+msgid "Standard shipping to rest of world"
+msgstr "Envoi standard vers le reste du monde"
+
+#: shipping/wagtail_hooks.py:10
+msgid "Shipping"
+msgstr "Envoi"
+
+#: stats/templates/stats/stats_panel.html:35
+msgid "Revenue this month"
+msgstr "Revenus de ce mois"
+
+#: stats/templates/stats/stats_panel.html:44
+msgid "Date"
+msgstr "Date"
+
+#: stats/templates/stats/stats_panel.html:50
+msgid "Revenue"
+msgstr "Revenu"
+
+#: stats/templates/stats/stats_panel.html:73
+msgid "Popular products this month"
+msgstr "Produit populaire de ce mois"
+
+#: stats/templates/stats/stats_panel.html:82
+msgid "No. Sales"
+msgstr "Nb. ventes"
+
+#: stats/templates/stats/stats_panel.html:88
+msgid "Product Title"
+msgstr "Titre du produit"

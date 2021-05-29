@@ -18,9 +18,9 @@ class CouponSerializer(serializers.ModelSerializer):
                 defaults={"coupon": coupon},
             )
             if not created:
-                raise serializers.ValidationError("Basket has already a coupon")
+                raise serializers.ValidationError(_("Basket has already a coupon"))
 
         else:
-            raise serializers.ValidationError("Coupon code invalid")
+            raise serializers.ValidationError(_("Coupon code invalid"))
 
         return coupon

@@ -1,4 +1,6 @@
+from django.utils.translation import ugettext_lazy as _
 from longclaw.checkout.errors import PaymentError
+
 
 class BasePayment(object):
     """
@@ -15,7 +17,7 @@ class BasePayment(object):
         """
         err = request.POST.get("error", False)
         if err:
-            raise PaymentError("Dummy error requested")
+            raise PaymentError(_("Dummy error requested"))
 
         return 'fake_transaction_id'
 

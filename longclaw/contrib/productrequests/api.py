@@ -1,10 +1,12 @@
 from rest_framework import viewsets, permissions, status
 from rest_framework.decorators import action
 from rest_framework.response import Response
+from django.utils.translation import ugettext_lazy as _
 
 from longclaw.contrib.productrequests.serializers import ProductRequestSerializer
 from longclaw.contrib.productrequests.models import ProductRequest
-from longclaw.utils import ProductVariant, maybe_get_product_model
+from longclaw.utils import ProductVariant
+
 
 class ProductRequestViewSet(viewsets.ModelViewSet):
     """create/list/get product requests
@@ -26,7 +28,7 @@ class ProductRequestViewSet(viewsets.ModelViewSet):
             response = Response(data=serializer.data, status=status.HTTP_201_CREATED)
         else:
             response = Response(
-                {"message": "Missing 'variant_id'"},
+                {"message": _("Missing 'variant_id'")},
                 status=status.HTTP_400_BAD_REQUEST)
 
         return response

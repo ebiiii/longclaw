@@ -1,5 +1,6 @@
 from django.db import models
 from django.dispatch import receiver
+from django.utils.translation import ugettext_lazy as _
 
 from longclaw.basket.signals import basket_modified
 from wagtail.admin.edit_handlers import FieldPanel
@@ -15,7 +16,7 @@ class ShippingRate(models.Model):
     name = models.CharField(
         max_length=32,
         unique=True,
-        help_text="Unique name to refer to this shipping rate by"
+        help_text=_("Unique name to refer to this shipping rate by")
     )
     rate = models.DecimalField(max_digits=12, decimal_places=2)
     carrier = models.CharField(max_length=64)

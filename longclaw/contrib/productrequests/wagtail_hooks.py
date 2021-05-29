@@ -3,6 +3,8 @@ try:
 except ImportError:
     from django.core.urlresolvers import reverse
 
+from django.utils.translation import ugettext_lazy as _
+
 from wagtail.core import hooks
 from wagtail.admin import widgets
 from longclaw.utils import ProductVariant
@@ -19,7 +21,7 @@ def product_requests_button(page, page_perms, is_parent=False):
     #  member or will be an instance of longclaw.utils.ProductVariant
     if hasattr(page, 'variants') or isinstance(page, ProductVariant):
         yield widgets.PageListingButton(
-            'View Requests',
+            _('View Requests'),
             reverse('productrequests_admin', kwargs={'pk': page.id}),
             priority=40
         )

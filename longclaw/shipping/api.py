@@ -1,4 +1,5 @@
 from django.db.models import Q
+from django.utils.translation import ugettext_lazy as _
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework import permissions, status, viewsets
 from rest_framework.response import Response
@@ -35,7 +36,7 @@ def get_shipping_cost_kwargs(request, country=None):
     country_code = request.query_params.get('country_code', None)
     if country:
         if country_code is not None:
-            raise utils.InvalidShippingCountry("Cannot specify country and country_code")
+            raise utils.InvalidShippingCountry(_("Cannot specify country and country_code"))
         country_code = country
 
     destination = request.query_params.get('destination', None)
@@ -43,9 +44,9 @@ def get_shipping_cost_kwargs(request, country=None):
         try:
             destination = models.Address.objects.get(pk=destination)
         except models.Address.DoesNotExist:
-            raise utils.InvalidShippingDestination("Address not found")
+            raise utils.InvalidShippingDestination(_("Address not found"))
     elif not country_code:
-        raise utils.InvalidShippingCountry("No country code supplied")
+        raise utils.InvalidShippingCountry(_("No country code supplied"))
 
     if not country_code:
         country_code = destination.country.pk
@@ -75,11 +76,11 @@ def shipping_cost(request):
             data = utils.get_shipping_cost(**kwargs)
         except utils.InvalidShippingRate:
             data = {
-                "message": "Shipping option {} is invalid".format(kwargs['name'])
+                "message": _("Shipping option {} is invalid").format(kwargs['name'])
             }
         except utils.InvalidShippingCountry:
             data = {
-                "message": "Shipping to {} is not available".format(kwargs['country_code'])
+                "message": _("Shipping to {} is not available").format(kwargs['country_code'])
             }
         else:
             status_code = status.HTTP_200_OK
@@ -117,7 +118,7 @@ def shipping_options(request, country=None):
         if not destination:
             return Response(
                 data={
-                    "message": "Destination address is required for rates to {}.".format(country_code)
+                    "message": _("Destination address is required for rates to {}.").format(country_code)
                 },
                 status=status.HTTP_400_BAD_REQUEST
             )

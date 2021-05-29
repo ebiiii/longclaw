@@ -32,7 +32,7 @@
     options: {
       title: {
         display: true,
-        text: 'Revenue this month'
+        text: "{% trans 'Revenue this month' %}"
       },
       legend: {
         display: false
@@ -41,13 +41,13 @@
         xAxes: [{
               scaleLabel: {
                   display: true,
-                  labelString: 'Date'
+                  labelString: "{% trans 'Date' %}"
                 }
             }],
         yAxes: [{
           scaleLabel: {
               display: true,
-              labelString: 'Revenue ({{currency}})'
+              labelString: "{% trans 'Revenue' %} ({{currency}})"
             }
         }]
       }
@@ -70,7 +70,7 @@
     options: {
       title: {
         display: true,
-        text: 'Popular products this month'
+        text: "{% trans 'Popular products this month' %}"
       },
       scales: {
             yAxes: [{
@@ -79,13 +79,13 @@
                 },
                 scaleLabel: {
                   display: true,
-                  labelString: 'No. Sales'
+                  labelString: "{% trans 'No. Sales' %}"
                 }
             }],
             xAxes: [{
               scaleLabel: {
                   display: true,
-                  labelString: 'Product Title'
+                  labelString: "{% trans 'Product Title' %}"
                 }
             }]
         },

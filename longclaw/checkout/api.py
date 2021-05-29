@@ -3,6 +3,7 @@ Shipping logic and payment capture API
 """
 from django.utils import timezone
 from django.db import transaction
+from django.utils.translation import ugettext_lazy as _
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework import permissions, status
 from rest_framework.response import Response
@@ -37,7 +38,7 @@ def create_order_with_token(request):
         email = request.data['email']
         transaction_id = request.data['transaction_id']
     except KeyError:
-        return Response(data={"message": "Missing parameters from request data"},
+        return Response(data={"message": _("Missing parameters from request data")},
                         status=status.HTTP_400_BAD_REQUEST)
 
     # Create the order

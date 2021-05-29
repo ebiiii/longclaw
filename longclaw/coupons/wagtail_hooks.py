@@ -1,12 +1,13 @@
 from wagtail.contrib.modeladmin.options import (
     ModelAdmin, modeladmin_register
 )
+from django.utils.translation import ugettext_lazy as _
 from longclaw.coupons.models import Coupon
 
 
 class CouponModelAdmin(ModelAdmin):
     model = Coupon
-    menu_label = 'Coupon'
+    menu_label = _('Coupon')
     menu_order = 200
     menu_icon = 'success'
     add_to_settings_menu = False

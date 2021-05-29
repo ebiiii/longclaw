@@ -28,9 +28,9 @@
     <table class="listing">
       <thead>
         <tr>
-          <th class="title">Request Date</th>
-          <th class="title">Variant</th>
-          <th class="title">Email</th>
+          <th class="title">{% trans "Request Date" %}</th>
+          <th class="title">{% trans "Variant" %}</th>
+          <th class="title">{% trans "Email" %}</th>
         </tr>
       </thead>
       <tbody>
@@ -38,7 +38,7 @@
         <tr>
           <td>{{request.created_date|date}}</td>
           <td><a href="{% pageurl page %}">{{request.variant}}</a></td>
-          <td>{% if request.email %}{{request.email}}{% else %}Not Given{% endif %}</td>
+          <td>{% if request.email %}{{request.email}}{% else %}{% trans "Not Given" %}{% endif %}</td>
         </tr>
         {% endfor %}
       </tbody>

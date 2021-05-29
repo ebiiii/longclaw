@@ -1,6 +1,7 @@
 from decimal import Decimal
 from longclaw.settings import ALLOW_NEGATIVE_STOCK
 from django.utils import timezone
+from django.utils.translation import ugettext_lazy as _
 from ipware.ip import get_client_ip
 
 from longclaw.basket.utils import get_basket_items, destroy_basket
@@ -118,7 +119,7 @@ def create_order(email,
         item.variant.update_stock(-item.quantity)
 
     if capture_payment:
-        desc = 'Payment from {} for order id #{}'.format(email, order.id)
+        desc = _('Payment from {} for order id #{}').format(email, order.id)
         try:
             transaction_id = GATEWAY.create_payment(request,
                                                     order.total + shipping_rate,
