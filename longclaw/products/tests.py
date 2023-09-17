@@ -1,4 +1,4 @@
-from wagtail.tests.utils import WagtailPageTests
+from wagtail.test.utils import WagtailPageTests
 from longclaw.utils import maybe_get_product_model
 from longclaw.tests.testproducts.models import ProductIndex
 from longclaw.tests.utils import ProductVariantFactory

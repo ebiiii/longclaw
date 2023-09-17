@@ -3,7 +3,7 @@ from django.dispatch import receiver
 from django.utils.translation import ugettext_lazy as _
 
 from longclaw.basket.signals import basket_modified
-from wagtail.admin.edit_handlers import FieldPanel
+from wagtail.admin.panels import FieldPanel
 
 from ..signals import address_modified
 

@@ -2,8 +2,7 @@
 Admin confiurable settings for longclaw apps
 """
 from wagtail.contrib.settings.models import BaseSetting, register_setting
-from wagtail.admin.edit_handlers import FieldPanel
-from wagtail.snippets.edit_handlers import SnippetChooserPanel
+from wagtail.admin.panels import FieldPanel
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 
@@ -46,7 +45,7 @@ not only those with configured shipping rates"""))
         FieldPanel('default_shipping_rate'),
         FieldPanel('default_shipping_carrier'),
         FieldPanel('default_shipping_enabled'),
-        SnippetChooserPanel('shipping_origin'),
+        FieldPanel('shipping_origin'),
         FieldPanel('currency_html_code'),
         FieldPanel('currency')
     )

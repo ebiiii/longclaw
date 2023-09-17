@@ -2,7 +2,7 @@ from django.db import models
 from django.utils.timezone import now
 
 
-from wagtail.admin.edit_handlers import FieldPanel
+from wagtail.admin.panels import FieldPanel
 
 
 class Coupon(models.Model):

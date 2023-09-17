@@ -5,7 +5,7 @@ except ImportError:
 
 from django.utils.translation import ugettext_lazy as _
 
-from wagtail.core import hooks
+from wagtail import hooks
 from wagtail.admin import widgets
 from longclaw.utils import ProductVariant
 

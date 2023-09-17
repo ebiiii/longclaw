@@ -6,7 +6,7 @@ try:
 except ImportError:
   from django.core.urlresolvers import reverse_lazy
 from django.contrib.auth.models import User
-from wagtail.tests.utils import WagtailTestUtils
+from wagtail.test.utils import WagtailTestUtils
 from longclaw.tests.utils import LongclawTestCase, OrderFactory
 from longclaw.orders.wagtail_hooks import OrderModelAdmin
 
