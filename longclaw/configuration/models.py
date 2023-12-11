@@ -1,7 +1,7 @@
 """
 Admin confiurable settings for longclaw apps
 """
-from wagtail.contrib.settings.models import BaseSetting, register_setting
+from wagtail.contrib.settings.models import BaseSiteSetting, register_setting
 from wagtail.admin.panels import FieldPanel
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
@@ -10,7 +10,7 @@ from longclaw.shipping.models import Address
 
 
 @register_setting
-class Configuration(BaseSetting):
+class Configuration(BaseSiteSetting):
     default_shipping_rate = models.DecimalField(
         default=3.95,
         max_digits=12,
