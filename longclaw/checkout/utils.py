@@ -1,7 +1,7 @@
 from decimal import Decimal
 from longclaw.settings import ALLOW_NEGATIVE_STOCK
 from django.utils import timezone
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 from ipware.ip import get_client_ip
 
 from longclaw.basket.utils import get_basket_items, destroy_basket

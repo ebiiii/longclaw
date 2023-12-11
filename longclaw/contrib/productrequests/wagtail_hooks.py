@@ -3,7 +3,7 @@ try:
 except ImportError:
     from django.core.urlresolvers import reverse
 
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 
 from wagtail import hooks
 from wagtail.admin import widgets

@@ -3,7 +3,7 @@ from jinja2 import nodes
 from jinja2.ext import Extension
 
 from django.template.loader import get_template
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 
 from .templatetags.basket_tags import get_basket_items
 from .utils import get_basket_items

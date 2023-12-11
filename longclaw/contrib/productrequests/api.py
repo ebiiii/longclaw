@@ -1,7 +1,7 @@
 from rest_framework import viewsets, permissions, status
 from rest_framework.decorators import action
 from rest_framework.response import Response
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 
 from longclaw.contrib.productrequests.serializers import ProductRequestSerializer
 from longclaw.contrib.productrequests.models import ProductRequest

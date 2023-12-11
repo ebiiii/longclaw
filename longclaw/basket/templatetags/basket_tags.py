@@ -1,5 +1,5 @@
 from django import template
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 from longclaw.basket.utils import get_basket_items
 
 register = template.Library()
