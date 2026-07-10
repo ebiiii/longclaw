@@ -38,7 +38,7 @@ INSTALLED_APPS = [
     'wagtail.search',
     'wagtail.admin',
     'wagtail',
-    'wagtail.contrib.modeladmin',
+    'wagtail_modeladmin',
     'wagtail.contrib.settings',
 
     'modelcluster',
@@ -53,6 +53,7 @@ INSTALLED_APPS = [
     'longclaw.orders',
     'longclaw.checkout',
     'longclaw.basket',
+    'longclaw.coupons',
     'longclaw.stats',
     'longclaw.contrib.productrequests',
     'longclaw.tests.testproducts',
@@ -66,7 +67,7 @@ MIDDLEWARE = [
     'django.middleware.common.CommonMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
-    'wagtail.middleware.SiteMiddleware',
+    'wagtail.contrib.legacy.sitemiddleware.SiteMiddleware',
     'wagtail.contrib.redirects.middleware.RedirectMiddleware',
 ]
 

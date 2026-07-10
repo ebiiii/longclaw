@@ -2,11 +2,11 @@ from django.contrib.admin.utils import quote
 from django.utils.translation import gettext as _
 from django.urls import re_path
 
-from wagtail.contrib.modeladmin.options import (
+from wagtail_modeladmin.options import (
     ModelAdmin, modeladmin_register
 )
-from wagtail.contrib.modeladmin.helpers import ButtonHelper
-from wagtail.contrib.modeladmin.views import InspectView
+from wagtail_modeladmin.helpers import ButtonHelper
+from wagtail_modeladmin.views import InspectView
 from longclaw.orders.models import Order
 from longclaw.settings import API_URL_PREFIX
 
