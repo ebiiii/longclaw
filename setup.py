@@ -87,9 +87,9 @@ setup(
     ],
     include_package_data=True,
     install_requires=[
-        'django<5',
-        'wagtail>=6.4,<7',
-        'wagtail-modeladmin>=2.2,<2.3',
+        'django<6',
+        'wagtail>=6.4,<8',
+        'wagtail-modeladmin>=2.2,<3',
         'django-countries',
         'django-extensions',
         'djangorestframework',

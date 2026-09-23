@@ -28,8 +28,8 @@ class AddressViewSet(viewsets.ModelViewSet):
         address_modified.send(sender=models.Address, instance=instance)
 
     def perform_destroy(self, instance):
-        output = super().perform_destroy(instance)
         address_modified.send(sender=models.Address, instance=instance)
+        output = super().perform_destroy(instance)
 
 
 def get_shipping_cost_kwargs(request, country=None):
